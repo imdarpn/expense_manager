@@ -42,11 +42,6 @@ class CategoryModel {
 
   Map<String, dynamic> toJson() => _$CategoryModelToJson(this);
 
-  Map<String, CategoryType> categoryTypeMap = {
-    StringConstants.expense: CategoryType.expense,
-    StringConstants.income: CategoryType.income,
-  };
-
   static List<CategoryModel> categoryFromJson(List<Map<String, Object?>> list) =>
       List<CategoryModel>.from(
         list.map((x) => CategoryModel.fromJson(x)),

@@ -1,9 +1,13 @@
+import 'package:expense_manager/common/constants/image_constants.dart';
+import 'package:expense_manager/common/enum/loading_status.dart';
 import 'package:expense_manager/common/widgets/common_scaffold.dart';
 import 'package:expense_manager/common/widgets/date_list_item.dart';
 import 'package:expense_manager/common/widgets/monthly_total_expense_income_widget.dart';
+import 'package:expense_manager/common/widgets/no_data_found.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../common/widgets/month_calender.dart';
+import '../../routes/app_pages.dart';
 import 'transaction_controller.dart';
 
 class TransactionView extends GetView<TransactionController> {
@@ -21,7 +25,7 @@ class TransactionView extends GetView<TransactionController> {
           child: IconButton(
               onPressed: () async {}, icon: const Icon(Icons.search_rounded)),
         ),
-        body: ListView.builder(
+        body: /*ListView.builder(
             physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.only(bottom: 75),
             shrinkWrap: true,
@@ -36,9 +40,44 @@ class TransactionView extends GetView<TransactionController> {
                 );
               }
               return const DateListItem();
-            }),
+            })*/
+        Obx(() {
+          if (controller.transactionState.transactions.isEmpty &&
+              controller.transactionState.loadingState.value != LoadingStatus.loading) {
+            return const NoDataFound(
+                assetName: ImageConstants.noTransactionFound,
+                label: "No Transactions for the selected month");
+          } else if (controller.transactionState.transactions.isEmpty &&
+              controller.transactionState.loadingState.value == LoadingStatus.loading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              padding: const EdgeInsets.only(bottom: 75),
+              shrinkWrap: true,
+              itemCount: controller.transactionState.transactions.length + 1,
+              itemBuilder: (context, pos) {
+                if (pos == 0) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0, top: 8),
+                    child: MonthlyTotalExpenseIncomeWidget(
+                        monthTransactionModel: controller
+                            .transactionState.totalMonthlyTransactionModel.value),
+                  );
+                }
+                return DateListItem(
+                    date: controller.transactionState.transactions.keys.elementAt(pos - 1),
+                    transactions:
+                    controller.transactionState.transactions.values.elementAt(pos - 1));
+              });
+        }),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+
+            Get.toNamed(Routes.addTransaction);
+          },
           tooltip: 'Increment',
           child: const Icon(
             Icons.add,

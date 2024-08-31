@@ -19,7 +19,7 @@ class DatabaseUtil {
 
   Future initDB() async {
     String databasesPath = await getDbPath();
-    db = await openDatabase(databasesPath, version: 1,
+    db = await openDatabase(databasesPath, version: 2,
         onConfigure: (Database db) async {
           await db.execute('PRAGMA foreign_keys = ON');
         }, onCreate: (Database db, int version) async {

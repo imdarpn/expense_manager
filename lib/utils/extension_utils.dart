@@ -38,3 +38,27 @@ extension DominoAnimation on Widget {
     );
   }
 }
+
+extension DateExtension on DateTime {
+  DateTime copyTime(TimeOfDay from) {
+    return DateTime(year, month, day, from.hour, from.minute);
+  }
+
+  bool isSameDate(DateTime other) {
+    return isSameMonth(other) &&
+        day == other.day;
+  }
+
+  bool isSameMonth(DateTime other) {
+    return year == other.year &&
+        month == other.month;
+  }
+
+  String formatDate() {
+    return DateFormat("dd-MM-yyyy").format(this);
+  }
+
+  String formatTime() {
+    return DateFormat("hh:mm a").format(this);
+  }
+}

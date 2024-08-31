@@ -27,10 +27,12 @@ class CategoryController extends GetxController
     if (index == 0) {
       categoryState.categoryExpenseModelList.value =
           DatabaseUtil().getCategoryByType(categoryType: CategoryType.expense);
+      categoryState.categoryExpenseModelList.refresh();
       logger.i("CATEGORY LIST --${categoryState.categoryExpenseModelList.length}");
     } else {
       categoryState.categoryIncomeModelList.value =
           DatabaseUtil().getCategoryByType(categoryType: CategoryType.income);
+      categoryState.categoryIncomeModelList.refresh();
       logger.i("CATEGORY LIST --${categoryState.categoryIncomeModelList.length}");
     }
     update();

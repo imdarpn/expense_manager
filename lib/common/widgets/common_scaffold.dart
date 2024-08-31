@@ -49,7 +49,7 @@ class CommonScaffold extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: showAppBar
           ? AppBar(
-              leadingWidth: showBackIcon ? 72 : 0,
+              leadingWidth: showBackIcon ? 24 : 0,
               backgroundColor: backgroundColor,
               titleSpacing: titleSpacing,
               scrolledUnderElevation: 0,

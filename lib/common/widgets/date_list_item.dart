@@ -1,20 +1,38 @@
 import 'package:expense_manager/common/constants/size_constants.dart';
+import 'package:expense_manager/common/database/database_util.dart';
+import 'package:expense_manager/common/models/category_model.dart';
+import 'package:expense_manager/common/models/transaction_model.dart';
 import 'package:expense_manager/common/widgets/common_text.dart';
 import 'package:expense_manager/common/widgets/common_widgets.dart';
+import 'package:expense_manager/pages/transactions/transaction_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../constants/color_constants.dart';
+import 'date_chip.dart';
 
 class DateListItem extends StatelessWidget {
+  final String date;
+  final List<TransactionModel> transactions;
 
   const DateListItem(
-      {super.key});
+      {super.key,
+        required this.date,
+        required this.transactions,
+      });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          child: DateChip(
+            label: date,
+            transStats: Get.find<TransactionController>().transactionState.dailyStats[date],
+          ),
+        ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           decoration: BoxDecoration(
@@ -26,21 +44,29 @@ class DateListItem extends StatelessWidget {
           ),
           child: ListView.builder(
             shrinkWrap: true,
-            itemCount: 4,
+            itemCount: transactions.length,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, pos) {
-
+              TransactionModel transaction = transactions[pos];
+              CategoryModel? categoryModel;
+              try {
+                categoryModel = Get.find<DatabaseUtil>().categories.firstWhere(
+                      (element) => element.id == transaction.categoryId,
+                );
+              } catch (e) {
+                debugPrint('error in cat');
+              }
               return ListTile(
 
                   onTap: () {},
-                  title: const CommonText(
-                    text:"transaction.desc",
+                  title: CommonText(
+                    text:transaction.desc,
                   ),
-                  subtitle: const Column(
+                  subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CommonText(
-                        text: "CategoryName",
+                        text: categoryModel!.categoryName ?? "",
                       )
                     ],
                   ),
@@ -48,12 +74,11 @@ class DateListItem extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      const CommonText(
-                        text: "100",
+                      CommonText(
+                        text: transaction.amount.toStringAsFixed(2),
                       ),
                       CommonText(
-                         text:  DateFormat('dd-MM-yyyy | hh:mm a')
-                              .format(DateTime.now())
+                         text:  ""
                       )
                     ],
                   ));

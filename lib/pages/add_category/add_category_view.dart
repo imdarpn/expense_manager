@@ -6,10 +6,7 @@ import 'package:expense_manager/common/widgets/common_text.dart';
 import 'package:expense_manager/common/widgets/common_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../common/enum/category_type.dart';
-import '../../common/widgets/category_list.dart';
 import '../../common/widgets/category_type_selector.dart';
-import '../../utils/logger_util.dart';
 import 'add_category_controller.dart';
 
 class AddCategoryView extends GetView<AddCategoryController> {

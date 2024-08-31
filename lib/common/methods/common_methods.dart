@@ -41,4 +41,18 @@ class CommonMethods {
     ];
   }
 
+  static int getFirstDate(DateTime currentDate) {
+    return DateTime(currentDate.year, currentDate.month, 1)
+        .millisecondsSinceEpoch;
+  }
+
+  static int getLastDate(DateTime currentDate) {
+    DateTime dateTime = DateTime(currentDate.year, currentDate.month + 1, 0);
+    return dateTime.millisecondsSinceEpoch;
+  }
+
+  static DateTime getNextMonth(DateTime dateTime) {
+    return DateTime(dateTime.year, dateTime.month + 1, dateTime.day);
+  }
+
 }
