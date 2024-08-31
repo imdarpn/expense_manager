@@ -1,8 +1,10 @@
 import 'package:expense_manager/pages/bottom_nav_menu/bottom_nav_menu_binding.dart';
+import 'package:expense_manager/pages/transactions/transaction_binding.dart';
+import 'package:expense_manager/pages/transactions/transaction_view.dart';
 import 'package:get/get.dart';
 
 import '../pages/bottom_nav_menu/bottom_nav_menu_view.dart';
-import '../pages/splash/splash_bindings.dart';
+import '../pages/splash/splash_binding.dart';
 import '../pages/splash/splash_view.dart';
 
 part 'app_routes.dart';
@@ -15,7 +17,7 @@ class AppPages {
     GetPage(
       name: _Paths.splash,
       page: () => const SplashView(),
-      binding: SplashBindings(),
+      binding: SplashBinding(),
     ),
 
     /// Dashboard view
@@ -23,6 +25,13 @@ class AppPages {
       name: _Paths.bottomNavMenu,
       page: () => const BottomNavMenuView(),
       binding: BottomNavMenuBinding(),
+    ),
+
+    /// Transaction view
+    GetPage(
+      name: _Paths.transaction,
+      page: () => const TransactionView(),
+      binding: TransactionBinding(),
     ),
   ];
 }

@@ -1,3 +1,4 @@
+import 'package:expense_manager/common/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/font_constants.dart';
@@ -22,7 +23,7 @@ class CommonText extends StatelessWidget {
     this.maxLine = 3,
     this.softWrap,
     this.textAlign,
-    this.color,
+    this.color = ColorConstants.darkGreyColor,
     this.textDecoration = TextDecoration.none,
     this.decorationColor,
     this.fontSize,

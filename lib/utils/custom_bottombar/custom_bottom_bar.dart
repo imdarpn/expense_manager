@@ -63,13 +63,13 @@ class CustomBottomBar extends StatelessWidget {
         margin: const EdgeInsets.all(8),
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-            boxShadow:  [
+           /* boxShadow:  [
               BoxShadow(
                 color:Colors.white.withOpacity(0.7),
                 offset: const Offset(0.0, -50), //(x,y)
                 blurRadius: 20.0,
               ),
-            ],
+            ],*/
           borderRadius: BorderRadius.circular(35),
           color: ColorConstants.primaryColor.withOpacity(0.5),
         ),

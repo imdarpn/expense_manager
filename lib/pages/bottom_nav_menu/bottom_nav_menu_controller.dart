@@ -1,5 +1,7 @@
 
 import 'package:expense_manager/pages/splash/splash_view.dart';
+import 'package:expense_manager/pages/transactions/transaction_binding.dart';
+import 'package:expense_manager/pages/transactions/transaction_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +15,7 @@ class BottomNavMenuController extends GetxController with GetSingleTickerProvide
 
 
   final pages = <String>[
-    Routes.splash,
+    Routes.transaction,
     Routes.splash,
     Routes.splash,
   ];
@@ -48,11 +50,11 @@ class BottomNavMenuController extends GetxController with GetSingleTickerProvide
 
 
   Route? onGenerateRoute(RouteSettings settings) {
-    if (settings.name == Routes.splash) {
+    if (settings.name == Routes.transaction) {
       return GetPageRoute(
         settings: settings,
-        page: () => const SplashView(),
-        binding: BottomNavMenuBinding(),);
+        page: () => const TransactionView(),
+        binding: TransactionBinding(),);
     }
 
    return null;

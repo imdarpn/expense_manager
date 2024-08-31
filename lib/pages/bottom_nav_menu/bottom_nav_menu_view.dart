@@ -42,7 +42,7 @@ class BottomNavMenuView extends GetView<BottomNavMenuController> {
   Widget getView() {
     return Navigator(
       key: Get.nestedKey(0),
-      initialRoute: Routes.splash,
+      initialRoute: Routes.transaction,
       onGenerateRoute: controller.onGenerateRoute,
     );
   }

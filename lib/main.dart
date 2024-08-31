@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import 'common/constants/color_constants.dart';
 import 'common/constants/font_constants.dart';
-import 'pages/splash/splash_bindings.dart';
+import 'pages/splash/splash_binding.dart';
 import 'routes/app_pages.dart';
 
 void main() {
@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
         focusColor: ColorConstants.whiteColor,
       ),
       debugShowCheckedModeBanner: false,
-      initialBinding: SplashBindings(),
+      initialBinding: SplashBinding(),
       initialRoute: AppPages.initialRoute,
       getPages: AppPages.routes,
 
