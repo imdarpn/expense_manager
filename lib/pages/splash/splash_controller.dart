@@ -1,14 +1,20 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+
+import '../../routes/app_pages.dart';
 
 class SplashController extends GetxController with GetTickerProviderStateMixin {
 
   @override
   void onInit() {
+    Future.delayed(
+      const Duration(seconds: 2),
+          () => redirectScreen(),
+    );
     super.onInit();
+  }
+
+  redirectScreen() {
+    Get.offAllNamed(Routes.bottomNavMenu,);
   }
 }
