@@ -1,4 +1,8 @@
+import 'package:expense_manager/pages/add_category/add_category_binding.dart';
+import 'package:expense_manager/pages/add_category/add_category_view.dart';
 import 'package:expense_manager/pages/bottom_nav_menu/bottom_nav_menu_binding.dart';
+import 'package:expense_manager/pages/category/category_binding.dart';
+import 'package:expense_manager/pages/category/category_view.dart';
 import 'package:expense_manager/pages/transactions/transaction_binding.dart';
 import 'package:expense_manager/pages/transactions/transaction_view.dart';
 import 'package:get/get.dart';
@@ -32,6 +36,20 @@ class AppPages {
       name: _Paths.transaction,
       page: () => const TransactionView(),
       binding: TransactionBinding(),
+    ),
+
+    /// Category view
+    GetPage(
+      name: _Paths.category,
+      page: () => const CategoryView(),
+      binding: CategoryBinding(),
+    ),
+
+    /// Add Category view
+    GetPage(
+      name: _Paths.addCategory,
+      page: () => const AddCategoryView(),
+      binding: AddCategoryBinding(),
     ),
   ];
 }

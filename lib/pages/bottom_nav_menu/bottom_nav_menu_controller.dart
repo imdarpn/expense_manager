@@ -1,4 +1,6 @@
 
+import 'package:expense_manager/pages/category/category_binding.dart';
+import 'package:expense_manager/pages/category/category_view.dart';
 import 'package:expense_manager/pages/splash/splash_view.dart';
 import 'package:expense_manager/pages/transactions/transaction_binding.dart';
 import 'package:expense_manager/pages/transactions/transaction_view.dart';
@@ -16,7 +18,7 @@ class BottomNavMenuController extends GetxController with GetSingleTickerProvide
 
   final pages = <String>[
     Routes.transaction,
-    Routes.splash,
+    Routes.category,
     Routes.splash,
   ];
 
@@ -55,6 +57,11 @@ class BottomNavMenuController extends GetxController with GetSingleTickerProvide
         settings: settings,
         page: () => const TransactionView(),
         binding: TransactionBinding(),);
+    } else if (settings.name == Routes.category) {
+      return GetPageRoute(
+        settings: settings,
+        page: () => const CategoryView(),
+        binding: CategoryBinding(),);
     }
 
    return null;

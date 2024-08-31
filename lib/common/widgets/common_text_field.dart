@@ -151,8 +151,9 @@ class CommonTextField extends StatelessWidget {
         counterText: counterText,
         fillColor: filledColor ?? ColorConstants.whiteColor,
         filled: filled,
-        hintText: hintText,
-        hintStyle: TextStyle(
+        //hintText: hintText,
+        labelText: hintText,
+        labelStyle: TextStyle(
           color: hintColor,
           fontSize: hintFontSize ?? FontConstants.font_14,
           fontWeight: hintFontWeight ?? inputFontWeight,
@@ -202,8 +203,8 @@ class CommonTextField extends StatelessWidget {
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
-          borderSide: BorderSide(
-            color: borderColor ?? ColorConstants.transparentColor,
+          borderSide: const BorderSide(
+            color: ColorConstants.redColor,
           ),
         ),
       ),
