@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../common/constants/image_constants.dart';
+import '../../common/methods/common_methods.dart';
 import 'splash_controller.dart';
 
 class SplashView extends GetView<SplashController> {

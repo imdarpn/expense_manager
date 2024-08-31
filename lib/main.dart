@@ -1,3 +1,4 @@
+import 'package:expense_manager/common/database/database_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -7,8 +8,20 @@ import 'common/constants/font_constants.dart';
 import 'pages/splash/splash_binding.dart';
 import 'routes/app_pages.dart';
 
-void main() {
+Future<void> main(main) async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+
+  await initializeDatabase();
   runApp(const MyApp());
+}
+
+
+// Function to initialize the database
+Future<void> initializeDatabase() async {
+  DatabaseUtil dbUtil = DatabaseUtil(); // Create an instance of DatabaseUtil
+  await dbUtil.initDB(); // Initialize the database
+  Get.put<DatabaseUtil>(dbUtil); // Register the instance with GetX for dependency injection
 }
 
 class MyApp extends StatelessWidget {
@@ -56,12 +69,16 @@ class MyApp extends StatelessWidget {
         canvasColor: ColorConstants.whiteColor,
         focusColor: ColorConstants.whiteColor,
       ),
+
       debugShowCheckedModeBanner: false,
       initialBinding: SplashBinding(),
       initialRoute: AppPages.initialRoute,
       getPages: AppPages.routes,
 
+
     );
   }
+
+
 }
 

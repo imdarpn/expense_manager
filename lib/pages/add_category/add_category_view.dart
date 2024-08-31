@@ -18,42 +18,56 @@ class AddCategoryView extends GetView<AddCategoryController> {
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
-        showAppBar: true,
-        showBackIcon: true,
-        showLabel: false,
-        titleWidget: const CommonText(
-          text: StringConstants.addCategory,
+      showAppBar: true,
+      showBackIcon: true,
+      showLabel: false,
+      titleWidget: Obx(() {
+        return CommonText(
+          text: controller.addCategoryState.isEdit.value ? "Edit Category":  StringConstants.addCategory,
           fontSize: FontConstants.font_20,
           fontWeight: FontWeightConstants.bold,
-        ),
-        bodyPadding: EdgeInsets.all(16),
-        body: Form(
-          key: controller.addCategoryState.formKey,
-          child: Column(
-            children: <Widget>[
-              const SizedBox(
-                height: 20,
-              ),
-              CommonTextField(
-                hintText: StringConstants.addCategory,
-                textEditingController: controller.addCategoryState.categoryNameController,
-                errorMessage: StringConstants.errorCategoryName,
+        );
+      }),
+      bodyPadding: EdgeInsets.all(16),
+      body: Form(
+        key: controller.addCategoryState.formKey,
+        child: Column(
+          children: <Widget>[
+            const SizedBox(
+              height: 20,
+            ),
+            CommonTextField(
+              hintText: StringConstants.addCategory,
+              textEditingController: controller.addCategoryState
+                  .categoryNameController,
+              errorMessage: StringConstants.errorCategoryName,
 
-              ),
-              const SizedBox(height: 8),
-              CategoryTypeSelector(
-                onSelect: controller.setTransactionType,
-                currentType: controller.addCategoryState.categoryType,
-              ),
+            ),
+            const SizedBox(height: 8),
+            controller.addCategoryState.isEdit.value
+                ? const SizedBox() :
+            CategoryTypeSelector(
+              onSelect: controller.setTransactionType,
+              currentType: controller.addCategoryState.categoryType,
+            ),
 
-              const SizedBox(height: 40),
-              CommonFilledButton(onPressed: (){}, buttonText: StringConstants.addCategory),
-              const SizedBox(
-                height: 20,
-              ),
-            ],
-          ),
+            const SizedBox(height: 40),
+            CommonFilledButton(onPressed: () {
+              if (controller.addCategoryState.formKey.currentState!
+                  .validate()) {
+                if (controller.addCategoryState.isEdit.value) {
+                  controller.updateCategory();
+                } else {
+                  controller.addCategory();
+                }
+              }
+            }, buttonText: controller.addCategoryState.isEdit.value ?  "Update Category" :StringConstants.addCategory),
+            const SizedBox(
+              height: 20,
+            ),
+          ],
         ),
-       );
+      ),
+    );
   }
 }
