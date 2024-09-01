@@ -5,6 +5,7 @@ import '../../routes/app_pages.dart';
 
 class SplashController extends GetxController with GetTickerProviderStateMixin {
 
+
   @override
   void onInit() {
     Future.delayed(
@@ -14,7 +15,7 @@ class SplashController extends GetxController with GetTickerProviderStateMixin {
     super.onInit();
   }
 
-  redirectScreen() {
+  redirectScreen() async {
     Get.offAllNamed(Routes.bottomNavMenu,);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:expense_manager/common/constants/size_constants.dart';
 import 'package:expense_manager/common/database/database_util.dart';
+import 'package:expense_manager/common/enum/category_type.dart';
 import 'package:expense_manager/common/models/category_model.dart';
 import 'package:expense_manager/common/models/transaction_model.dart';
 import 'package:expense_manager/common/widgets/common_text.dart';
@@ -9,7 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../api_service/api_constant.dart';
 import '../constants/color_constants.dart';
+import '../methods/common_methods.dart';
 import 'date_chip.dart';
 
 class DateListItem extends StatelessWidget {
@@ -66,7 +69,7 @@ class DateListItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CommonText(
-                        text: categoryModel!.categoryName ?? "",
+                        text: categoryModel!.categoryName ,
                       )
                     ],
                   ),
@@ -75,11 +78,9 @@ class DateListItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       CommonText(
-                        text: transaction.amount.toStringAsFixed(2),
+                        text: "${ApiConstant.selectedCode} ${CommonMethods.getConversionRate(transaction.amount).toStringAsFixed(2)}",
+                        color: categoryModel.categoryType == CategoryType.income ? ColorConstants.greenColor : ColorConstants.redColor ,
                       ),
-                      CommonText(
-                         text:  ""
-                      )
                     ],
                   ));
             },

@@ -32,7 +32,7 @@ class MyLogger {
 
   void _print(dynamic message) {
     if (kDebugMode) {
-      print("$message");
+      developer.log("$message");
     }
   }
 

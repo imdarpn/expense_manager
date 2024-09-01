@@ -11,6 +11,7 @@ class StringConstants {
   static const addCategory = 'Add Category';
   static const categoryName = 'Category Name';
   static const errorCategoryName = 'Please enter a category name';
+  static const noInternetConnection = 'Please check internet connection';
 
 }
 

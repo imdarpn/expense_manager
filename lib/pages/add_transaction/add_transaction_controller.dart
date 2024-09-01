@@ -1,5 +1,6 @@
 import 'package:expense_manager/common/database/database_util.dart';
 import 'package:expense_manager/common/database/table_name.dart';
+import 'package:expense_manager/common/methods/common_methods.dart';
 import 'package:expense_manager/common/models/category_model.dart';
 import 'package:expense_manager/common/models/transaction_model.dart';
 import 'package:expense_manager/pages/add_category/add_category_state.dart';
@@ -51,20 +52,17 @@ class AddTransactionController extends GetxController {
   }
 
   void saveTransaction() async {
-
     DateTime combinedDateTime = addTransactionState.transactionDate.copyTime(addTransactionState.transactionTime);
 
     TransactionModel newTransaction = TransactionModel(
       createdAt: combinedDateTime.millisecondsSinceEpoch,
-      amount: double.parse("${addTransactionState.categoryType.value == CategoryType.expense ? '-' : '+'}${addTransactionState.amountController.text}"),
+      amount: CommonMethods.storeConversionRateInDB(double.parse("${addTransactionState.categoryType.value == CategoryType.expense ? '-' : '+'}${addTransactionState.amountController.text}")),
       desc: addTransactionState.descController.text,
       categoryId: addTransactionState.selectedCategory!.id!,
     );
     newTransaction.id = await Get.find<DatabaseUtil>().db.insert(TableName.transaction, newTransaction.toJson());
-    logger.i("ID --- ${newTransaction.id}");
     Get.back();
     Get.find<TransactionController>().refreshListIfNeeded(combinedDateTime);
-
   }
 
 
