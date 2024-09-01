@@ -19,7 +19,7 @@ class TransactionController extends GetxController {
   void onInit() {
     transactionState.totalMonthlyTransactionModel.value =
         TotalMonthTransactionModel(
-            income: 1000.00, expense: 500.00, total: 500.00);
+            income: 0.00, expense: 0.00, total: 0.00);
 
     super.onInit();
     fetchTransactions();
@@ -32,6 +32,7 @@ class TransactionController extends GetxController {
 
     var transList = await Get.find<DatabaseUtil>().db.rawQuery(
       '''SELECT * from ${TableName.transaction} 
+      WHERE created_at BETWEEN ${CommonMethods.getFirstDate(transactionState.currentDate.value)} AND ${CommonMethods.getLastDate(transactionState.currentDate.value)}
       ORDER BY created_at DESC''',
     );
     logger.i("LIST -- ${transList.length}");
@@ -57,38 +58,6 @@ class TransactionController extends GetxController {
     dateWiseRaw.forEach((date, rawTransactions) {
       List<TransactionModel> tempList = <TransactionModel>[];
 
-     /* batchTransaction.forEach((batchId, txnList) {
-        if (batchId != "others") {
-          TransactionModel temp = TransactionModel.fromJson(txnList.first);
-          temp.amount = temp.amount.abs();
-          tempList.add(temp);
-        } else {
-          tempList.addAll(txnList.map<TransactionModel>((rawTrans) {
-            TransactionModel trans = TransactionModel.fromJson(rawTrans);
-            if (!isSearch) {
-              (transactionState.dailyStats[date] ??= TotalMonthTransactionModel(income: 0, expense: 0, total: 0)).total += trans.amount;
-              if (trans.amount.isNegative) {
-                (transactionState.dailyStats[date] ??= TotalMonthTransactionModel(income: 0, expense: 0, total: 0)).expense +=
-                    trans.amount;
-              } else {
-                (transactionState.dailyStats[date] ??= TotalMonthTransactionModel(income: 0, expense: 0, total: 0)).income +=
-                    trans.amount;
-              }
-              transactionState.totalMonthlyTransactionModel.update((stats) {
-                stats?.total += trans.amount;
-                if (trans.amount.isNegative) {
-                  stats?.expense += trans.amount;
-                } else {
-                  stats?.income += trans.amount;
-                }
-              });
-            }
-
-            return trans;
-          }));
-        }
-      });*/
-      // Assuming there is no 'batch_id' anymore as there is no join with `${Const.transLinks}`
       tempList.addAll(rawTransactions.map<TransactionModel>((rawTrans) {
         TransactionModel trans = TransactionModel.fromJson(rawTrans);
 
@@ -120,5 +89,22 @@ class TransactionController extends GetxController {
 
       transactionState.transactions.value = dateWiseTransactions;
     }
+
+  void goToNextMonth() {
+    transactionState.currentDate.value = CommonMethods.getNextMonth(transactionState.currentDate.value);
+    fetchTransactions();
+  }
+
+  void goToPreviousMonth() {
+    transactionState.currentDate.value = transactionState.currentDate.value.copyWith(month: transactionState.currentDate.value.month - 1);
+    fetchTransactions();
+  }
+
+  void setDate(DateTime? dateTime) {
+    if (dateTime != null) {
+      transactionState.currentDate.value = dateTime;
+      fetchTransactions();
+    }
+  }
 
 }

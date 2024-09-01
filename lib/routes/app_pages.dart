@@ -5,6 +5,8 @@ import 'package:expense_manager/pages/add_transaction/add_transaction_view.dart'
 import 'package:expense_manager/pages/bottom_nav_menu/bottom_nav_menu_binding.dart';
 import 'package:expense_manager/pages/category/category_binding.dart';
 import 'package:expense_manager/pages/category/category_view.dart';
+import 'package:expense_manager/pages/monthly_graph/monthly_graph_binding.dart';
+import 'package:expense_manager/pages/monthly_graph/monthly_graph_view.dart';
 import 'package:expense_manager/pages/transactions/transaction_binding.dart';
 import 'package:expense_manager/pages/transactions/transaction_view.dart';
 import 'package:get/get.dart';
@@ -59,6 +61,13 @@ class AppPages {
       name: _Paths.addTransaction,
       page: () => const AddTransactionView(),
       binding: AddTransactionBinding(),
+    ),
+
+    /// Monthly Graph view
+    GetPage(
+      name: _Paths.monthlyGraph,
+      page: () => const MonthlyGraphView(),
+      binding: MonthlyGraphBinding(),
     ),
   ];
 }

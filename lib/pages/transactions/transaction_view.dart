@@ -20,35 +20,32 @@ class TransactionView extends GetView<TransactionController> {
         showBackIcon: false,
         titleWidget: const MonthCalender(),
         showActions: true,
-        actionsWidgets: Padding(
-          padding: const EdgeInsets.only(right: 10),
-          child: IconButton(
-              onPressed: () async {}, icon: const Icon(Icons.search_rounded)),
+        actionsWidgets: Obx(
+          () => Container(
+            child: controller.transactionState.transactions.isEmpty
+                ? Container()
+                : Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: IconButton(
+                        onPressed: () {
+                          Get.toNamed(Routes.monthlyGraph,arguments: {
+                            "current_date":controller.transactionState.currentDate
+                          });
+                        },
+                        icon: const Icon(Icons.line_axis_outlined)),
+                  ),
+          ),
         ),
-        body: /*ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            padding: const EdgeInsets.only(bottom: 75),
-            shrinkWrap: true,
-            itemCount: 5,
-            itemBuilder: (context, pos) {
-              if (pos == 0) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0, top: 8),
-                  child: MonthlyTotalExpenseIncomeWidget(
-                      monthTransactionModel: controller
-                          .transactionState.totalMonthlyTransactionModel.value),
-                );
-              }
-              return const DateListItem();
-            })*/
-        Obx(() {
+        body: Obx(() {
           if (controller.transactionState.transactions.isEmpty &&
-              controller.transactionState.loadingState.value != LoadingStatus.loading) {
+              controller.transactionState.loadingState.value !=
+                  LoadingStatus.loading) {
             return const NoDataFound(
                 assetName: ImageConstants.noTransactionFound,
                 label: "No Transactions for the selected month");
           } else if (controller.transactionState.transactions.isEmpty &&
-              controller.transactionState.loadingState.value == LoadingStatus.loading) {
+              controller.transactionState.loadingState.value ==
+                  LoadingStatus.loading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
@@ -63,19 +60,20 @@ class TransactionView extends GetView<TransactionController> {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 8.0, top: 8),
                     child: MonthlyTotalExpenseIncomeWidget(
-                        monthTransactionModel: controller
-                            .transactionState.totalMonthlyTransactionModel.value),
+                        monthTransactionModel: controller.transactionState
+                            .totalMonthlyTransactionModel.value),
                   );
                 }
                 return DateListItem(
-                    date: controller.transactionState.transactions.keys.elementAt(pos - 1),
-                    transactions:
-                    controller.transactionState.transactions.values.elementAt(pos - 1));
+                    date: controller.transactionState.transactions.keys
+                        .elementAt(pos - 1),
+                    transactions: controller
+                        .transactionState.transactions.values
+                        .elementAt(pos - 1));
               });
         }),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-
             Get.toNamed(Routes.addTransaction);
           },
           tooltip: 'Increment',

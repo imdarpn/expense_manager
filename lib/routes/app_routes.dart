@@ -7,6 +7,7 @@ abstract class Routes {
   static const String category = _Paths.category;
   static const String addCategory = _Paths.addCategory;
   static const String addTransaction = _Paths.addTransaction;
+  static const String monthlyGraph = _Paths.monthlyGraph;
 
 }
 
@@ -17,5 +18,6 @@ abstract class _Paths {
   static const String category = '/category';
   static const String addCategory = '/add_category';
   static const String addTransaction = '/add_transaction';
+  static const String monthlyGraph = '/monthly_graph';
 
 }
