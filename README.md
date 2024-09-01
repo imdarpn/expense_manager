@@ -1,16 +1,24 @@
 # expense_manager
 
-A new Flutter project.
+Project description
 
-## Getting Started
+## Expense Income App
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Functionalities
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- User can add category for income and expense
+- add transaction for expense and income
+- show monthly pie chart
+- rate conversation 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Structure
+
+- We uses the GetX for state management.
+- We used repository structure
+- For API calling we are using Dio
+
+## Development SDK
+
+- Flutter 3.22.3
+- Dart 3.4.4

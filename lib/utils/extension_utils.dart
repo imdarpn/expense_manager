@@ -10,7 +10,7 @@ extension FormatAmount on double? {
   ///
   /// - [ print(15.formatAmount()); ] output: $15.00
   String formatAmount() {
-    NumberFormat numberFormat = NumberFormat.simpleCurrency(name: 'USD');
+    NumberFormat numberFormat = NumberFormat.simpleCurrency(name: '');
 
     if (this == null) {
       return numberFormat.format(0);

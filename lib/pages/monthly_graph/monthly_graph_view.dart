@@ -2,6 +2,7 @@ import 'package:expense_manager/common/constants/color_constants.dart';
 import 'package:expense_manager/common/widgets/common_scaffold.dart';
 import 'package:expense_manager/common/widgets/common_text.dart';
 import 'package:expense_manager/common/widgets/common_widgets.dart';
+import 'package:expense_manager/utils/extension_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -66,7 +67,7 @@ class MonthlyGraphView extends GetView<MonthlyGraphController> {
                         ),
                         CommonText(
                           text: "${ApiConstant.selectedCode} ${CommonMethods.getConversionRate(controller
-                              .monthlyGraphState.chartModelList[index].total!).toStringAsFixed(2)}",
+                              .monthlyGraphState.chartModelList[index].total!).formatAmount()}",
 
                         ),
                       ],

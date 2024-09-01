@@ -1,6 +1,7 @@
 import 'package:expense_manager/api_service/api_constant.dart';
 import 'package:expense_manager/common/constants/color_constants.dart';
 import 'package:expense_manager/common/constants/font_constants.dart';
+import 'package:expense_manager/common/constants/string_constants.dart';
 import 'package:expense_manager/common/widgets/common_scaffold.dart';
 import 'package:expense_manager/common/widgets/common_text.dart';
 import 'package:expense_manager/common/widgets/common_widgets.dart';
@@ -19,7 +20,7 @@ class SettingView extends GetView<SettingController> {
         showBackIcon: false,
         showLabel: false,
         titleWidget: const CommonText(
-          text: "Rate Conversation",
+          text: StringConstants.rateConversation,
           fontSize: FontConstants.font_20,
           fontWeight: FontWeightConstants.bold,
         ),

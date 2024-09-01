@@ -1,4 +1,5 @@
 import 'package:expense_manager/common/models/category_model.dart';
+import 'package:expense_manager/common/models/transaction_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +18,7 @@ class AddTransactionState {
   Rx<CategoryType> categoryType = CategoryType.expense.obs;
   RxBool isEdit = false.obs;
   final formKey = GlobalKey<FormState>();
+  TransactionModel? previousTransaction;
 
 
 }

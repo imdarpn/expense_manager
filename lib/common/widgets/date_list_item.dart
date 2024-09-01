@@ -1,3 +1,4 @@
+import 'package:expense_manager/common/constants/font_constants.dart';
 import 'package:expense_manager/common/constants/size_constants.dart';
 import 'package:expense_manager/common/database/database_util.dart';
 import 'package:expense_manager/common/enum/category_type.dart';
@@ -6,11 +7,13 @@ import 'package:expense_manager/common/models/transaction_model.dart';
 import 'package:expense_manager/common/widgets/common_text.dart';
 import 'package:expense_manager/common/widgets/common_widgets.dart';
 import 'package:expense_manager/pages/transactions/transaction_controller.dart';
+import 'package:expense_manager/utils/extension_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../api_service/api_constant.dart';
+import '../../routes/app_pages.dart';
 import '../constants/color_constants.dart';
 import '../methods/common_methods.dart';
 import 'date_chip.dart';
@@ -45,7 +48,7 @@ class DateListItem extends StatelessWidget {
               CommonWidgets.commonBoxShadow()
             ],
           ),
-          child: ListView.builder(
+          child: ListView.separated(
             shrinkWrap: true,
             itemCount: transactions.length,
             physics: const NeverScrollableScrollPhysics(),
@@ -61,7 +64,12 @@ class DateListItem extends StatelessWidget {
               }
               return ListTile(
 
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(Routes.addTransaction,arguments: {
+                    "edit": true,
+                    "transaction": transaction
+                    });
+                  },
                   title: CommonText(
                     text:transaction.desc,
                   ),
@@ -78,11 +86,16 @@ class DateListItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       CommonText(
-                        text: "${ApiConstant.selectedCode} ${CommonMethods.getConversionRate(transaction.amount).toStringAsFixed(2)}",
+                        text: "${ApiConstant.selectedCode} ${CommonMethods.getConversionRate(transaction.amount).formatAmount()}",
                         color: categoryModel.categoryType == CategoryType.income ? ColorConstants.greenColor : ColorConstants.redColor ,
+                        fontSize: FontConstants.font_13,
+                        fontWeight: FontWeightConstants.medium,
                       ),
                     ],
                   ));
+            },
+            separatorBuilder: (context,index) {
+              return Divider(color: ColorConstants.greyColor.withOpacity(0.5),);
             },
           ),
         ),

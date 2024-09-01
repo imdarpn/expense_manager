@@ -20,7 +20,7 @@ class AddCategoryView extends GetView<AddCategoryController> {
       showLabel: false,
       titleWidget: Obx(() {
         return CommonText(
-          text: controller.addCategoryState.isEdit.value ? "Edit Category":  StringConstants.addCategory,
+          text: controller.addCategoryState.isEdit.value ? StringConstants.editCategory:  StringConstants.addCategory,
           fontSize: FontConstants.font_20,
           fontWeight: FontWeightConstants.bold,
         );
@@ -58,7 +58,7 @@ class AddCategoryView extends GetView<AddCategoryController> {
                   controller.addCategory();
                 }
               }
-            }, buttonText: controller.addCategoryState.isEdit.value ?  "Update Category" :StringConstants.addCategory),
+            }, buttonText: controller.addCategoryState.isEdit.value ?  StringConstants.updateCategory:StringConstants.addCategory),
             const SizedBox(
               height: 20,
             ),

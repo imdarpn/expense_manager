@@ -1,4 +1,5 @@
 import 'package:expense_manager/common/constants/image_constants.dart';
+import 'package:expense_manager/common/constants/string_constants.dart';
 import 'package:expense_manager/common/enum/loading_status.dart';
 import 'package:expense_manager/common/widgets/common_scaffold.dart';
 import 'package:expense_manager/common/widgets/date_list_item.dart';
@@ -42,7 +43,7 @@ class TransactionView extends GetView<TransactionController> {
                   LoadingStatus.loading) {
             return const NoDataFound(
                 assetName: ImageConstants.noTransactionFound,
-                label: "No Transactions for the selected month");
+                label: StringConstants.noTransactionForSelectedMonth);
           } else if (controller.transactionState.transactions.isEmpty &&
               controller.transactionState.loadingState.value ==
                   LoadingStatus.loading) {
@@ -74,7 +75,9 @@ class TransactionView extends GetView<TransactionController> {
         }),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Get.toNamed(Routes.addTransaction);
+            Get.toNamed(Routes.addTransaction,arguments: {
+              "edit":false
+            });
           },
           tooltip: 'Increment',
           child: const Icon(

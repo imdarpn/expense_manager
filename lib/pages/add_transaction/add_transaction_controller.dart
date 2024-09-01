@@ -22,8 +22,14 @@ class AddTransactionController extends GetxController {
   }
 
   void getDataFromPreviousPage() {
-    setDate(DateTime.now());
-    setTime(TimeOfDay.now());
+    addTransactionState.isEdit.value = Get.arguments?['edit'] ?? false;
+    if (addTransactionState.isEdit.value) {
+      prefillTransaction(Get.arguments['transaction']);
+    } else {
+      setDate(DateTime.now());
+      setTime(TimeOfDay.now());
+    }
+
   }
 
 
@@ -52,6 +58,9 @@ class AddTransactionController extends GetxController {
   }
 
   void saveTransaction() async {
+    if (addTransactionState.isEdit.value) {
+      await deleteTransaction(fromDelete: false);
+    }
     DateTime combinedDateTime = addTransactionState.transactionDate.copyTime(addTransactionState.transactionTime);
 
     TransactionModel newTransaction = TransactionModel(
@@ -63,6 +72,29 @@ class AddTransactionController extends GetxController {
     newTransaction.id = await Get.find<DatabaseUtil>().db.insert(TableName.transaction, newTransaction.toJson());
     Get.back();
     Get.find<TransactionController>().refreshListIfNeeded(combinedDateTime);
+  }
+
+  Future<void> deleteTransaction({bool fromDelete = true}) async {
+
+    await Get.find<DatabaseUtil>().db.delete(TableName.transaction,
+        where: "id = ?", whereArgs: [addTransactionState.previousTransaction?.id]);
+    if (fromDelete) {
+      Get.back();
+      Get.find<TransactionController>().fetchTransactions();
+    }
+  }
+
+  void prefillTransaction(TransactionModel transaction) {
+    addTransactionState.previousTransaction = transaction;
+    setDate(DateTime.fromMillisecondsSinceEpoch(transaction.createdAt));
+    setTime(TimeOfDay.fromDateTime(DateTime.fromMillisecondsSinceEpoch(transaction.createdAt)));
+    addTransactionState.amountController.text = transaction.amount.toString().replaceFirst("-", "");
+    addTransactionState.descController.text = transaction.desc;
+      CategoryModel category = Get.find<DatabaseUtil>().categories
+          .firstWhere((element) => element.id == transaction.categoryId);
+      setTransactionType(category.categoryType);
+      setCategory(category);
+
   }
 
 

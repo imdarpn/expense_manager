@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:mat_month_picker_dialog/mat_month_picker_dialog.dart';
 
+import '../constants/font_constants.dart';
+
 class MonthCalender extends StatelessWidget {
   const MonthCalender({super.key});
 
@@ -23,6 +25,8 @@ class MonthCalender extends StatelessWidget {
               InkWell(
                   child: Obx(() {
                     return CommonText(
+                        fontSize: FontConstants.font_17,
+                        fontWeight: FontWeightConstants.regular,
                         text: DateFormat("MMM y").format(controller.transactionState.currentDate.value));
                   }),
                 onTap: () async {

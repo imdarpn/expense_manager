@@ -186,13 +186,13 @@ class CommonTextField extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
           borderSide: BorderSide(
-            color: borderColor ?? ColorConstants.transparentColor,
+            color: ColorConstants.greyColor,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
           borderSide: BorderSide(
-            color: borderColor ?? ColorConstants.transparentColor,
+            color: ColorConstants.blackColor,
           ),
         ),
         focusedErrorBorder: OutlineInputBorder(

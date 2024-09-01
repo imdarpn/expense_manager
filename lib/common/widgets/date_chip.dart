@@ -1,6 +1,8 @@
 import 'package:expense_manager/common/constants/color_constants.dart';
+import 'package:expense_manager/common/constants/font_constants.dart';
 import 'package:expense_manager/common/models/total_month_transaction_model.dart';
 import 'package:expense_manager/common/widgets/common_text.dart';
+import 'package:expense_manager/utils/extension_utils.dart';
 import 'package:flutter/material.dart';
 
 import '../../api_service/api_constant.dart';
@@ -21,6 +23,10 @@ class DateChip extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 4.0),
           child: CommonText(
             text: label,
+            color: ColorConstants.accentColor,
+            fontSize: FontConstants.font_14,
+            fontWeight: FontWeightConstants.medium,
+
 
           ),
         ),
@@ -34,10 +40,12 @@ class DateChip extends StatelessWidget {
                   fit: BoxFit.scaleDown,
                   alignment: Alignment.centerRight,
                   child: CommonText(
-                    text: "${ApiConstant.selectedCode} ${CommonMethods.getConversionRate(transStats?.income ?? 0).toStringAsFixed(2)}",
+                    text: "${ApiConstant.selectedCode} ${CommonMethods.getConversionRate(transStats?.income ?? 0).formatAmount()}",
 
                     color: ColorConstants.greenColor,
                     textAlign: TextAlign.end,
+                    fontSize: FontConstants.font_14,
+                    fontWeight: FontWeightConstants.regular,
                   ),
                 ),
               ),
@@ -47,9 +55,11 @@ class DateChip extends StatelessWidget {
                   fit: BoxFit.scaleDown,
                   alignment: Alignment.centerRight,
                   child: CommonText(
-                    text: "${ApiConstant.selectedCode} ${CommonMethods.getConversionRate(transStats?.expense ?? 0).toStringAsFixed(2)}",
+                    text: "${ApiConstant.selectedCode} ${CommonMethods.getConversionRate(transStats?.expense ?? 0).formatAmount()}",
                     color: ColorConstants.redColor,
                     textAlign: TextAlign.end,
+                    fontSize: FontConstants.font_14,
+                    fontWeight: FontWeightConstants.regular,
                   ),
                 ),
               ),

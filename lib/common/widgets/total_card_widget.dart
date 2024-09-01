@@ -3,6 +3,7 @@ import 'package:expense_manager/common/constants/color_constants.dart';
 import 'package:expense_manager/common/constants/size_constants.dart';
 import 'package:expense_manager/common/methods/common_methods.dart';
 import 'package:expense_manager/common/widgets/common_text.dart';
+import 'package:expense_manager/utils/extension_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -81,7 +82,7 @@ class _StatItem extends StatelessWidget {
               fit: BoxFit.scaleDown,
               alignment: Alignment.centerRight,
               child: CommonText(
-                text: "${ApiConstant.selectedCode} ${CommonMethods.getConversionRate(value).toStringAsFixed(2)}",
+                text: "${ApiConstant.selectedCode} ${CommonMethods.getConversionRate(value).formatAmount()}",
                   fontWeight: FontWeightConstants.regular,
                   fontSize: FontConstants.font_14,
                 color: customColor
