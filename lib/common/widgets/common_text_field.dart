@@ -167,7 +167,7 @@ class CommonTextField extends StatelessWidget {
         prefixIcon: prefixIcon == null
             ? null
             : Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                padding: const EdgeInsets.symmetric(horizontal: 14.0,vertical: 14),
                 child: prefixIcon,
               ),
         suffixIcon: suffixIcon == null

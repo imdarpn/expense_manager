@@ -1,9 +1,6 @@
 import 'package:expense_manager/common/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../common/constants/image_constants.dart';
-import '../../common/methods/common_methods.dart';
 import 'splash_controller.dart';
 
 class SplashView extends GetView<SplashController> {
@@ -15,9 +12,13 @@ class SplashView extends GetView<SplashController> {
       height: double.infinity,
       width: double.infinity,
       color: ColorConstants.whiteColor,
-      child: Scaffold(
+      child: const Scaffold(
         backgroundColor: Colors.transparent,
-        body: Center(child: Image.asset(ImageConstants.splashLogo)),
+        body: Center(
+          child: FlutterLogo(
+            size: 100, // Customize the size of the logo
+          ),
+        ),
       ),
     );
   }

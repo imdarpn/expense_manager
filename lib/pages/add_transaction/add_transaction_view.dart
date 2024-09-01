@@ -1,3 +1,4 @@
+import 'package:expense_manager/api_service/api_constant.dart';
 import 'package:expense_manager/common/constants/color_constants.dart';
 import 'package:expense_manager/common/constants/font_constants.dart';
 import 'package:expense_manager/common/constants/string_constants.dart';
@@ -91,6 +92,11 @@ class AddTransactionView extends GetView<AddTransactionController> {
                   textEditingController: controller.addTransactionState
                       .amountController,
                   errorMessage: StringConstants.pleaseEnterAmount,
+                  prefixIcon: CommonText(
+                    text: ApiConstant.selectedCode,
+                    textAlign: TextAlign.center,
+                    fontWeight: FontWeightConstants.medium,
+                  ),
                   textInputType: TextInputType.numberWithOptions(decimal: true),
                   textInputAction: TextInputAction.next,
 
